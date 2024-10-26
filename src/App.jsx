@@ -1,9 +1,10 @@
+import Auth from "./components/Auth"
 
 function App() {
 
   return (
     <>
-      <h1>Abdul's Journal</h1>
+      <Auth/>
     </>
   )
 }
