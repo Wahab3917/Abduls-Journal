@@ -17,11 +17,11 @@ function Login() {
         const userData = await authService.getUser();
         if (userData) {
           dispatch(authLogin(userData));
-          navigate("/")
+          navigate("/");
         }
       }
     } catch (error) {
-      setError(error.message)
+      setError(error.message);
     }
   }
 
