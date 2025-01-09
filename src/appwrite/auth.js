@@ -1,5 +1,6 @@
 import { Client, Account, OAuthProvider } from 'appwrite'
 import config from '../config/config'
+import { login, logout } from '../store/authSlice'
 
 export class AuthService {
   client = new Client();
@@ -12,11 +13,17 @@ export class AuthService {
     this.account = new Account(this.client);
   }
 
-  loginWithGoogle = async () => {
+  loginWithGoogle = async (dispatch) => {
     try {
-      await this.account.createOAuth2Session(OAuthProvider.Google, 'http://localhost:5173')
+      await this.account.createOAuth2Session(OAuthProvider.Google, 'http://localhost:5173');
+      const userData = await this.account.get();
+      console.log('Fetched userData:', userData);
+      if (userData) {
+        dispatch(login({ userData }));
+        console.log('Dispatched login action with payload:', { userData });
+      }
     } catch (error) {
-      console.error(error)
+      console.error('Error during loginWithGoogle:', error);
     }
   }
 
@@ -24,17 +31,18 @@ export class AuthService {
     try {
       return await this.account.get()
     } catch (error) {
-      console.error(error)
+      console.error('Error during getUser:', error);
     }
 
     return null;
   }
 
-  logoutUser = async () => {
+  logoutUser = async (dispatch) => {
     try {
-      await this.account.deleteSessions()
+      await this.account.deleteSessions();
+      dispatch(logout());
     } catch (error) {
-      console.error(error)
+      console.error('Error during logoutUser:', error);
     }
   }
 }

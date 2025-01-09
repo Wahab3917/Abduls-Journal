@@ -10,7 +10,7 @@ function Header() {
     {
       name: 'Home',
       slug: "/",
-      active: true
+      active: true,
     },
     {
       name: "Blog",
