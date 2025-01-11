@@ -1,8 +1,9 @@
-import React from 'react'
+import React from 'react';
+import logo from '../images/diary.png';
 
-function Logo() {
+function Logo({width}) {
   return (
-    <div>Logo</div>
+    <img src={logo} alt="Logo" width={width} />
   )
 }
 

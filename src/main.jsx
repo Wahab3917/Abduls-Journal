@@ -11,7 +11,7 @@ import Home from "./pages/Home";
 import Post from "./pages/Post";
 import AddPost from "./pages/AddPost";
 import EditPost from "./pages/EditPost";
-import AllPosts from "./pages/AllPosts";
+// import AllPosts from "./pages/AllPosts";
 
 
 const router = createBrowserRouter([
@@ -21,28 +21,16 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />,
+        element: <Home />
       },
-      {
-        path: "/login",
-        element: (
-          <AuthLayout authentication={false}>
-            <Login />
-          </AuthLayout>
-        ),
-      },
-      {
-        path: "/blog",
-        element: (
-          <AuthLayout authentication={" "}>
-            <AllPosts />
-          </AuthLayout>
-        ),
-      },
+      // {
+      //   path: "/blog",
+      //   element: <AllPosts />
+      // },
       {
         path: "/add-post",
         element: (
-          <AuthLayout authentication={" "}>
+          <AuthLayout authentication={true}>
             <AddPost />
           </AuthLayout>
         ),
@@ -50,7 +38,7 @@ const router = createBrowserRouter([
       {
         path: "/edit-post/:slug",
         element: (
-          <AuthLayout authentication={" "}>
+          <AuthLayout authentication={true}>
             <EditPost />
           </AuthLayout>
         ),
