@@ -11,7 +11,7 @@ function PostForm({post}) {
       title: post?.title || "",
       slug: post?.$id || "",
       content: post?.content || "",
-      status: post?.status || "active",
+      status: post?.status || true,
     }
   });
 
@@ -19,6 +19,9 @@ function PostForm({post}) {
   const useData = useSelector((state) => state.auth.userData);
   
   const submit = async (data) => {
+    // Ensure status is a boolean
+    data.status = data.status === "true" || data.status === true;
+
     if (post) {
       const file = data.image[0] ? appwriteService.uploadFile(data.image[0]) : null
 
@@ -31,7 +34,7 @@ function PostForm({post}) {
         navigate(`/post/${dbPost.$id}`);
       }
     } else {
-      const file = data.image[0] ? appwriteService.uploadFile(data.image[0]) : null
+      const file = await appwriteService.uploadFile(data.image[0]);
       
       if (file) {
         const fileId = file.$id;
@@ -108,7 +111,10 @@ function PostForm({post}) {
           </div>
         )}
         <Select
-          options={["active", "inactive"]}
+          options={[
+            {value: true, label: "Published"},
+            {value: false, label: "Draft"},
+          ]}
           label="Status"
           className="mb-4"
           {...register("status", { required: true })}

@@ -19,12 +19,12 @@ export class Service {
       return await this.databases.createDocument(
         config.appwriteDatabaseId,
         config.appwriteCollectionId,
-        ID.unique(),
+        slug,
         {
           title,
           content,
           featureImage,
-          status,
+          status: Boolean(status),
           userId,
         },
       )
@@ -33,12 +33,12 @@ export class Service {
     }
   }
 
-  async updatePost(postId, {title, slug, content, featureImage, status}) {
+  async updatePost(slug, {title, content, featureImage, status}) {
     try {
       return await this.databases.updateDocument(
         config.appwriteDatabaseId,
         config.appwriteCollectionId,
-        postId,
+        slug,
         {
           title,
           content,
@@ -51,12 +51,12 @@ export class Service {
     }
   }
 
-  async deletePost(postId) {
+  async deletePost(slug) {
     try {
       await this.databases.deleteDocument(
         config.appwriteDatabaseId,
         config.appwriteCollectionId,
-        postId,
+        slug,
       )
       return true;
     } catch (error) {
@@ -65,12 +65,12 @@ export class Service {
     }
   }
 
-  async getPost(postId) {
+  async getPost(slug) {
     try {
       return await this.databases.getDocument(
         config.appwriteDatabaseId,
         config.appwriteCollectionId,
-        postId,
+        slug,
       )
     } catch (error) {
       console.log("Appwrite service :: getPost :: error", error);
@@ -78,7 +78,7 @@ export class Service {
     }
   }
 
-  async getPosts(queries = [Query.equal('status', 'active')]) {
+  async getPosts(queries = [Query.equal("status", true)]) {
     try {
       return await this.databases.listDocuments(
         config.appwriteDatabaseId,
