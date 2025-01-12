@@ -25,18 +25,10 @@ function App() {
     })
   }, [dispatch]);
 
-  const handleLoginWithGoogle = () => {
-    authService.loginWithGoogle(dispatch);
-  }
-
-  const handleLogout = () => {
-    authService.logoutUser(dispatch);
-  }
-
   return !loading ? (
     <div className='min-h-screen flex flex-wrap content-between'>
       <div className='w-full block'>
-        <Header onLogin={handleLoginWithGoogle} onLogout={handleLogout} />
+        <Header />
           <main>
             <Outlet />
           </main>

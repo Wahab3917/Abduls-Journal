@@ -16,7 +16,7 @@ function PostForm({post}) {
   });
 
   const navigate = useNavigate();
-  const useData = useSelector(state => state.user.userData);
+  const useData = useSelector((state) => state.auth.userData);
   
   const submit = async (data) => {
     if (post) {
@@ -28,7 +28,7 @@ function PostForm({post}) {
 
       const dbPost = await appwriteService.updatePost(post.$id, { ...data, featureImage: file ? file.$id : undefined});
       if (dbPost) {
-        navigate(`/blog/${dbPost.$id}`);
+        navigate(`/post/${dbPost.$id}`);
       }
     } else {
       const file = data.image[0] ? appwriteService.uploadFile(data.image[0]) : null
@@ -41,20 +41,21 @@ function PostForm({post}) {
           userId: useData.$id,
         });
         if (dbPost) {
-          navigate(`/blog/${dbPost.$id}`);
+          navigate(`/post/${dbPost.$id}`);
         }
       }
     }
   }
 
   const slugTransform = useCallback((value) => {
-    if (value && typeof value === 'string') return value
-      .trim()
-      .toLowerCase()
-      .replace(/^[a-zA-Z\d\s]+/g, '-')
-      .replace(/\s/g, '-');
+    if (value && typeof value === 'string')
+      return value
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-zA-Z\d\s]+/g, "-")
+        .replace(/\s/g, "-");
 
-      return '';
+    return '';
   }, []);
 
   useEffect(() => {
