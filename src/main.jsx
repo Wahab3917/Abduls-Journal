@@ -5,7 +5,7 @@ import store from './store/store'
 import App from './App.jsx'
 import './index.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import { AuthLayout, Login } from './components/index.js'
+import AuthLayout from './components/AuthLayout.jsx'
 
 import Home from "./pages/Home";
 import Post from "./pages/Post";
