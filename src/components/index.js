@@ -10,7 +10,7 @@ import RTE from "./RTE";
 import Login from "./Login";
 import PostForm from "./post-form/PostForm";
 import PostCard from "./PostCard";
-import AuthLayout from "./AuthLayout";
+// import AuthLayout from "./AuthLayout";
 import Loader from "./Loader";
 
 export { 
@@ -26,6 +26,8 @@ export {
   Login,
   PostForm,
   PostCard,
-  AuthLayout,
+  // AuthLayout,
   Loader,
 };
+
+export { default as AuthLayout } from "./AuthLayout";
