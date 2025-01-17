@@ -5,7 +5,7 @@ import store from './store/store'
 import App from './App.jsx'
 import './index.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import AuthLayout from './components/AuthLayout';
+// import AuthLayout from './components/AuthLayout';
 
 import Home from "./pages/Home";
 import Post from "./pages/Post";
@@ -30,17 +30,17 @@ const router = createBrowserRouter([
       {
         path: "/add-post",
         element: (
-          <AuthLayout authentication={true}>
+          // <AuthLayout authentication={true}>
             <AddPost />
-          </AuthLayout>
+          // </AuthLayout>
         ),
       },
       {
         path: "/edit-post/:slug",
         element: (
-          <AuthLayout authentication={true}>
+          // <AuthLayout authentication={true}>
             <EditPost />
-          </AuthLayout>
+          // </AuthLayout>
         ),
       },
       {
